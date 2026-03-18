@@ -30,7 +30,7 @@ The Ecommerce Microservices Platform is a modular and scalable system designed t
 
 - .NET SDK
 - Visual Studio / VS Code
-- Postman (for testing APIs)
+- Swagger
 - Git
 
 #### Thank You Guys & Good Luck! Best Regards, 
