@@ -43,11 +43,13 @@ The Ecommerce Microservices Platform is a modular and scalable system designed t
 
 From the repository root, run:
 
+
 ```bash
 docker compose up --build
 ```
 
-<img width="1365" height="889" alt="Screenshot 2026-02-18 180139" src="https://github.com/user-attachments/assets/8431fd59-1b4a-41b1-b28d-9e47b5f8f831" />
+<img width="1920" height="1080" alt="Screenshot (2078)" src="https://github.com/user-attachments/assets/9dfce108-5ffa-4710-bee8-8044759a2ac9" />
+
 
 
 ### Services and exposed ports
