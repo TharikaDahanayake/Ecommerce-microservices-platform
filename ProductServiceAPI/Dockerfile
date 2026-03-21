@@ -2,18 +2,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
-COPY ../Eccommerce.sln ./
-COPY ProductServiceAPI/*.csproj ./ProductServiceAPI/
+# Copy csproj and restore
+COPY *.csproj ./
+RUN dotnet restore
 
-RUN dotnet restore Eccommerce.sln
-
-COPY ProductServiceAPI/. ./ProductServiceAPI/
-WORKDIR /app/ProductServiceAPI
-
+# Copy everything else and publish
+COPY . ./
 RUN dotnet publish -c Release -o out
 
+# Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
-COPY --from=build /app/ProductServiceAPI/out .
+COPY --from=build /app/out .
 EXPOSE 5103
 ENTRYPOINT ["dotnet", "ProductServiceAPI.dll"]

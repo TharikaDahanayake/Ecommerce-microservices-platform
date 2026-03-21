@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   product:
     build: ./ProductServiceAPI
@@ -26,7 +24,7 @@ services:
       - ecommerce-net
 
   api-gateway:
-    build: ./Eccommerce
+    build: ./APIGateway
     container_name: api-gateway
     ports:
       - "5251:5251"
