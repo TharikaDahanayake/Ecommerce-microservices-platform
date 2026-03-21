@@ -16,4 +16,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="APIGateway\**\*.cs" />
+    <Content Remove="APIGateway\**\*" />
+    <EmbeddedResource Remove="APIGateway\**\*" />
+    <None Remove="APIGateway\**\*" />
+  </ItemGroup>
+
 </Project>

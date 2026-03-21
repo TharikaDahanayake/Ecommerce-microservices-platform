@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using ProductServiceAPI.Data;
+
 namespace ProductServiceAPI
 {
     public class Program
@@ -6,6 +9,9 @@ namespace ProductServiceAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ProductServiceAPIContext>(options =>
+                options.UseInMemoryDatabase("ProductsDb"));
 
             // Add services to the container.
 
@@ -22,8 +28,6 @@ namespace ProductServiceAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

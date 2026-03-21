@@ -1,40 +1,49 @@
 services:
-  product:
-    build: ./ProductServiceAPI
-    container_name: product-service
-    ports:
-      - "5103:5103"
-    networks:
-      - ecommerce-net
-
-  order:
-    build: ./OderServiceAPI
-    container_name: order-service
-    ports:
-      - "5256:5256"
-    networks:
-      - ecommerce-net
-
-  user:
-    build: ./UserServiceAPI
-    container_name: user-service
-    ports:
-      - "5036:5036"
-    networks:
-      - ecommerce-net
-
   api-gateway:
-    build: ./APIGateway
+    build:
+      context: ./APIGateway
+      dockerfile: Dockerfile
     container_name: api-gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
     ports:
-      - "5251:5251"
+      - "5251:8080"
     depends_on:
-      - product
-      - order
-      - user
-    networks:
-      - ecommerce-net
+      - user-service
+      - product-service
+      - order-service
 
-networks:
-  ecommerce-net:
-    driver: bridge
+  user-service:
+    build:
+      context: ./UserServiceAPI
+      dockerfile: Dockerfile
+    container_name: user-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "5036:8080"
+
+  product-service:
+    build:
+      context: ./ProductServiceAPI
+      dockerfile: Dockerfile
+    container_name: product-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "5103:8080"
+
+  order-service:
+    build:
+      context: ./OderServiceAPI
+      dockerfile: Dockerfile
+    container_name: order-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ApiGateway__BaseUrl=http://api-gateway:8080
+    ports:
+      - "5256:8080"

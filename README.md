@@ -33,5 +33,38 @@ The Ecommerce Microservices Platform is a modular and scalable system designed t
 - Swagger
 - Git
 
+## Run With Docker
+
+### Prerequisites for containers
+
+- Docker Desktop
+
+### Build and start all services
+
+From the repository root, run:
+
+```bash
+docker compose up --build
+```
+
+### Services and exposed ports
+
+- API Gateway: `http://localhost:5251`
+- User Service: `http://localhost:5036`
+- Product Service: `http://localhost:5103`
+- Order Service: `http://localhost:5256`
+
+### Gateway routes
+
+- `GET/POST http://localhost:5251/users`
+- `GET/POST http://localhost:5251/products`
+- `GET/POST http://localhost:5251/orders`
+
+### Stop containers
+
+```bash
+docker compose down
+```
+
 #### Thank You Guys & Good Luck! Best Regards, 
 **_Tharika Dahanayake_**

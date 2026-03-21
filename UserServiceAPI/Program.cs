@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using UserServiceAPI.Data;
+
 namespace UserServiceAPI
 {
     public class Program
@@ -6,6 +9,9 @@ namespace UserServiceAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<UserServiceAPIContext>(options =>
+                options.UseInMemoryDatabase("UsersDb"));
 
             // Add services to the container.
 
@@ -22,8 +28,6 @@ namespace UserServiceAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

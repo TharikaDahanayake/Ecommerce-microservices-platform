@@ -11,7 +11,7 @@ namespace OderServiceAPI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<OrderServiceAPIContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("OrderServiceAPIContext")));
+                options.UseInMemoryDatabase("OrdersDb"));
             
             // Add services to the container.
 
@@ -19,10 +19,11 @@ namespace OderServiceAPI
 
 
             // Register HttpClient with named client "ApiGateway"
+            var apiGatewayBaseUrl = builder.Configuration["ApiGateway:BaseUrl"] ?? "http://api-gateway:8080";
             builder.Services.AddHttpClient("ApiGateway", client =>
             { 
-            client.BaseAddress = new Uri("http://localhost:5146"); // API Gateway URL
-        });
+                client.BaseAddress = new Uri(apiGatewayBaseUrl);
+            });
 
             // Register HttpClient
 
@@ -40,8 +41,6 @@ namespace OderServiceAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
