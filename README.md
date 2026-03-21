@@ -47,6 +47,9 @@ From the repository root, run:
 docker compose up --build
 ```
 
+<img width="1365" height="889" alt="Screenshot 2026-02-18 180139" src="https://github.com/user-attachments/assets/8431fd59-1b4a-41b1-b28d-9e47b5f8f831" />
+
+
 ### Services and exposed ports
 
 - API Gateway: `http://localhost:5251`
